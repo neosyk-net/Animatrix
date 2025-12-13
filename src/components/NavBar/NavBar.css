@@ -4,6 +4,10 @@
     padding: 24px;
 }
 
+.navbar-left {
+    cursor: pointer;
+}
+
 .navbar-right ul {
     list-style: none;
     display: flex;
@@ -11,4 +15,5 @@
 
 .navbar-right li {
     margin: 12px;
+    cursor: pointer;
 }
