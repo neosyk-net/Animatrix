@@ -1,3 +1,27 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Geom:ital,wght@0,300..900;1,300..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  font-family: 'Geom', sans-serif;
+}
+
+
+
+
+
+
+
