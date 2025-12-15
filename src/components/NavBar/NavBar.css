@@ -1,7 +1,7 @@
 .navbar {
   position: relative;
-  min-height: 120px;
-  background-color: #1c1c1c;
+  min-height: 144px;
+  background-color: #000000;
   color: #f5f5f5;
   padding: 12px 16px;
   display: flex;
@@ -18,9 +18,31 @@
   background-image: url("../../assets/navbar-overlay.jpg");
   background-size: cover;
   background-position: center;
-  opacity: 0.07;
+  opacity: 0.0125;
   z-index: 0;
 }
+
+.with-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.with-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../../assets/navbar-overlay.jpg'); /* same image */
+  background-size: cover;
+  background-position: center;
+  opacity: 0.0125; 
+  z-index: 0;
+}
+
+.with-overlay > * {
+  position: relative;
+  z-index: 1;
+}
+
 
 .navbar > * {
   position: relative;
@@ -31,12 +53,17 @@
   padding: 0;
   list-style: none;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .navbar-right li {
   padding: 4px 32px 4px 0;
   font-size: 16px;
   font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: color 0.2s ease, transform 0.2s ease, text-shadow 0.2s ease;
   cursor: pointer;
 }
@@ -50,13 +77,14 @@
 .ax-logo {
   display: flex;
   align-items: center;
-  height: 80px;
+  height: 106px;
   width: auto;
+  padding-left: 8px;
   cursor: pointer;
 }
 
 .ax-icon {
-  height: 80px;
+  height: 104px;
   width: auto;
   display: flex;
   align-items: center;
@@ -97,4 +125,13 @@
     padding-right: 12px;
     margin-left: auto; /* 🔑 THIS IS THE MAGIC */
   }
+  .ax-logo {
+    height: 80px;
+    width: auto;
+  }
+  .ax-icon {
+    height: 80px;
+    width: auto;
+  }
 }
+
