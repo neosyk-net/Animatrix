@@ -4,7 +4,7 @@ import { Sword, Sparkles, Skull, Heart, Brain, Zap } from "lucide-react";
 
 const LearnMore = () => {
   return (
-    <section className="learn-more">
+    <section className="learn-more" id="learn-more">
       <div className="learn-more__content">
         <h2>What is AnimatriX?</h2>
 

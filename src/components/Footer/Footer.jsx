@@ -2,26 +2,27 @@ import React from "react";
 import "./Footer.css";
 import { Instagram, Twitter, Youtube } from "lucide-react";
 import ax_logo from '../../assets/aX-logo.png'
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="footer with-overlay">
+    <footer className="footer with-overlay" id="footer">
       <div className="footer-inner">
         <div className="footer-brand">
-            <img src={ax_logo} className='ax-logo' alt="" />
+            <a href="#"><img src={ax_logo} className='ax-logo' alt="" /></a>
         </div>
 
         <nav className="footer-links" aria-label="Footer">
           <div className="footer-col">
             <h4>Explore</h4>
-            <a href="#">Browse</a>
+            <Link to="/genres">Browse</Link>
             <a href="#">Top Picks</a>
             <a href="#">New</a>
           </div>
 
           <div className="footer-col">
             <h4>Company</h4>
-            <a href="#">About</a>
+            <a href="#learn-more">About</a>
             <a href="#">Contact</a>
             <a href="#">Privacy</a>
           </div>

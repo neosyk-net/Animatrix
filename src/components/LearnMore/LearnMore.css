@@ -1,6 +1,6 @@
 .learn-more {
   padding: 96px 16px;
-  background-color: #080808; 
+  background-color: #080808;
   display: flex;
   justify-content: center;
 }
@@ -14,6 +14,8 @@
 .learn-more__content h2 {
   font-size: clamp(1.8rem, 3vw, 2.6rem);
   margin-bottom: 16px;
+  letter-spacing: 0.1em;
+  font-weight: 600;
 }
 
 .learn-more__content p {
@@ -22,7 +24,6 @@
   opacity: 0.9;
   margin-bottom: 16px;
 }
-
 
 .anime-icons {
   margin-top: 40px;
@@ -42,11 +43,7 @@
   color: #dcdcdc;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(6px);
-  cursor: pointer;
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    color 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
 }
 
 .anime-icon svg {
@@ -54,15 +51,11 @@
   height: 32px;
 }
 
-
 .anime-icon:hover {
   transform: translateY(-4px) scale(1.05);
   color: indigo;
-  box-shadow:
-    0 0 16px rgba(75, 0, 130, 0.6),
-    0 0 32px rgba(75, 0, 130, 0.3);
+  box-shadow: 0 0 16px rgba(75, 0, 130, 0.6), 0 0 32px rgba(75, 0, 130, 0.3);
 }
-
 
 @media (max-width: 600px) {
   .anime-icons {
