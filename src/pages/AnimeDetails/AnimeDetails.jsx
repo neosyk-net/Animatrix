@@ -14,10 +14,14 @@ const AnimeDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // If you navigate to details from your genre page, pass state like:
-  // navigate(`/anime/${anime.mal_id}`, { state: { fromGenre: "/genre/1", genreName: "Action" } })
+  // ✅ set from GenrePage navigate state
+  // navigate(`/anime/${malId}`, { state: { fromGenre: `/genre/${genreKey}`, genreKey, genreName } })
   const fromGenre = location.state?.fromGenre || null;
+  const genreKey = location.state?.genreKey || null;
   const genreName = location.state?.genreName || null;
+
+  // ✅ bulletproof computed back link
+  const computedFromGenre = fromGenre || (genreKey ? `/genre/${genreKey}` : null);
 
   const [anime, setAnime] = useState(null);
   const [recs, setRecs] = useState([]);
@@ -55,7 +59,7 @@ const AnimeDetails = () => {
         setAnime(detail);
         setLoading(false);
 
-        // fetch recs from same genre (simple + consistent)
+        // fetch recs from same genre
         const g = detail?.genres?.[0];
         if (!g?.mal_id) {
           setRecs([]);
@@ -100,7 +104,6 @@ const AnimeDetails = () => {
       const node = recRowRef.current;
       if (!node) return;
 
-      // apply velocity
       if (Math.abs(velRef.current) > 0.2) {
         node.scrollLeft += velRef.current;
         velRef.current *= 0.86; // friction
@@ -112,14 +115,12 @@ const AnimeDetails = () => {
     };
 
     const onWheel = (e) => {
-      if (!hoverRef.current) return; // only when hovering the row
-      // stop page scroll while on the row
+      if (!hoverRef.current) return;
       e.preventDefault();
 
       const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
       const next = velRef.current + delta * WHEEL_SPEED;
 
-      // clamp
       velRef.current = Math.max(-MAX_VELOCITY, Math.min(MAX_VELOCITY, next));
 
       if (!rafRef.current) rafRef.current = requestAnimationFrame(tick);
@@ -135,14 +136,18 @@ const AnimeDetails = () => {
   const goBack = () => navigate(-1);
 
   const goBackToGenre = () => {
-    if (fromGenre) navigate(fromGenre);
-    else navigate("/genres"); // fallback (change if your route differs)
+    // ✅ go to the actual genre page if we have it
+    if (computedFromGenre) return navigate(computedFromGenre);
+
+    // last resort
+    navigate("/genres");
   };
 
   const openAnime = (malId) => {
     navigate(`/anime/${malId}`, {
       state: {
-        fromGenre,
+        fromGenre: computedFromGenre,
+        genreKey: genreKey || null,
         genreName: genreName || primaryGenre?.name || null,
       },
     });
@@ -205,9 +210,7 @@ const AnimeDetails = () => {
                 <span className="dot" />
                 <span>{anime.status || "—"}</span>
                 <span className="dot" />
-                <span>
-                  {anime.score ? `⭐ ${anime.score}` : "⭐ —"}
-                </span>
+                <span>{anime.score ? `⭐ ${anime.score}` : "⭐ —"}</span>
               </div>
 
               <p className="ad-desc">{anime.synopsis || "No synopsis available."}</p>
