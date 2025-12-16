@@ -6,6 +6,7 @@ import AnimeInfo from "./pages/AnimeInfo/AnimeInfo"
 import AnimeGenres from "./pages/AnimeGenres/AnimeGenres"
 import Footer from "./components/Footer/Footer"
 import AnimeDetails from "./pages/AnimeDetails/AnimeDetails"
+import LearnMore from "./components/LearnMore/LearnMore"
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
       <Route path="/:malId" element={<AnimeInfo />} /> 
       <Route path="/anime/:id" element={<AnimeDetails />} /> 
     </Routes>
+    <LearnMore />
     <Footer />
     </>
   )
