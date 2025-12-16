@@ -8,7 +8,6 @@ const AnimeGenres = () => {
   return (
     <>
       <GenreDisplay />
-      <LearnMore />
     </>
   );
 };
