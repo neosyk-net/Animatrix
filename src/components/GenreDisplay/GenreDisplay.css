@@ -2,7 +2,6 @@
 .genres-hero {
   min-height: 90vh;
   width: 100%;
-
   background-image: url("/anime-hero.jpeg");
   background-size: cover;
   background-position: center;
@@ -22,6 +21,53 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== ENERGY / LIGHTNING TEST EFFECT (MUST SHOW) ===== */
+.genres-overlay::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  z-index: 0;
+  pointer-events: none;
+
+  background:
+    radial-gradient(circle at 20% 30%, rgb(71, 70, 70), transparent 40%),
+    radial-gradient(circle at 75% 35%, rgba(0, 0, 0, 0.651), transparent 45%),
+    radial-gradient(circle at 50% 75%, rgba(0, 0, 0, 0.4), transparent 50%);
+
+  filter: blur(3px) contrast(260%);
+  opacity: 0.9;
+
+  /* IMPORTANT: no blend mode = impossible to hide */
+  mix-blend-mode: normal;
+
+  animation: stormPulse 3s ease-in-out infinite;
+}
+
+/* keep all content above the effect */
+.genres-overlay > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== PULSE ANIMATION ===== */
+@keyframes stormPulse {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-3%, 2%) scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
 }
 
 /* ===== CONTENT WRAPPER ===== */
@@ -35,7 +81,7 @@
   align-items: center;
 }
 
-/* ===== GENRE GRID (DESKTOP) ===== */
+/* ===== GENRE GRID ===== */
 .genres {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -46,7 +92,7 @@
   max-width: 820px;
 }
 
-/* ===== GENRE BUTTON (RECTANGLE) ===== */
+/* ===== GENRE CARD ===== */
 .genre-card {
   all: unset;
   cursor: pointer;
@@ -73,7 +119,7 @@
     box-shadow 0.25s ease;
 }
 
-/* ===== HOVER & FOCUS ===== */
+/* ===== HOVER ===== */
 .genre-card:hover {
   background: rgba(25, 25, 25, 0.95);
   transform: translateY(-6px);
@@ -109,7 +155,7 @@
   background: linear-gradient(
     100deg,
     rgba(30, 30, 30, 0.6) 40%,
-    rgba(55, 55, 55, 0.8) 50%,
+    rgba(0, 0, 0, 0.8) 50%,
     rgba(30, 30, 30, 0.6) 60%
   );
   background-size: 200% 100%;
@@ -117,7 +163,6 @@
   animation: skeleton-loading 1.4s ease infinite;
 }
 
-/* Disable hover effects for skeletons */
 .skeleton-card:hover {
   transform: none;
   box-shadow: none;
@@ -142,12 +187,10 @@
   text-align: center;
 }
 
-/* ===== MOBILE CENTERING ===== */
+/* ===== MOBILE ===== */
 @media (max-width: 600px) {
   .genres {
     grid-template-columns: 1fr;
-    grid-template-rows: auto;
-
     width: fit-content;
     max-width: 100%;
     margin: 0 auto;

@@ -1,53 +1,59 @@
-import React, { useEffect, useState } from 'react'
-import './GenreDisplay.css'
-import axios from 'axios'
+import React, { useEffect, useState } from "react";
+import "./GenreDisplay.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ALLOWED_GENRES = [
-  'Action',
-  'Adventure',
-  'Mystery',
-  'Horror',
-  'Fantasy',
-  'Psychological',
-]
+  "Action",
+  "Adventure",
+  "Mystery",
+  "Horror",
+  "Fantasy",
+  "Psychological",
+];
 
-const MIN_LOADING_TIME = 900 // ms – adjust if you want longer/shorter
+const MIN_LOADING_TIME = 900; // ms – adjust if you want longer/shorter
 
 const GenreDisplay = () => {
-  const [genres, setGenres] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
+  const navigate = useNavigate();
+
+  const [genres, setGenres] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const toGenreKey = (name) =>
+    name.toLowerCase().replace(/[^a-z0-9]/g, ""); // "Slice of Life" -> "sliceoflife"
 
   useEffect(() => {
     const fetchGenres = async () => {
       try {
-        const start = Date.now()
+        const start = Date.now();
 
-        const res = await axios.get('https://api.jikan.moe/v4/genres/anime')
+        const res = await axios.get("https://api.jikan.moe/v4/genres/anime");
 
         const filtered = res.data.data.filter((g) =>
           ALLOWED_GENRES.includes(g.name)
-        )
+        );
 
-        setGenres(filtered)
+        setGenres(filtered);
 
         // ensure skeleton shows for at least MIN_LOADING_TIME
-        const elapsed = Date.now() - start
+        const elapsed = Date.now() - start;
         if (elapsed < MIN_LOADING_TIME) {
           await new Promise((resolve) =>
             setTimeout(resolve, MIN_LOADING_TIME - elapsed)
-          )
+          );
         }
       } catch (err) {
-        console.error(err)
-        setError('Failed to load genres')
+        console.error(err);
+        setError("Failed to load genres");
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchGenres()
-  }, [])
+    fetchGenres();
+  }, []);
 
   /* ===== SKELETON LOADING STATE ===== */
   if (loading) {
@@ -63,7 +69,7 @@ const GenreDisplay = () => {
           </div>
         </div>
       </section>
-    )
+    );
   }
 
   /* ===== ERROR STATE ===== */
@@ -76,7 +82,7 @@ const GenreDisplay = () => {
           </div>
         </div>
       </section>
-    )
+    );
   }
 
   /* ===== MAIN CONTENT ===== */
@@ -85,20 +91,25 @@ const GenreDisplay = () => {
       <div className="genres-overlay">
         <div className="genres-content">
           <div className="genres">
-            {genres.map((g) => (
-              <button
-                key={g.mal_id}
-                className="genre-card"
-              >
-                <h3>{g.name}</h3>
-                <p>{g.count?.toLocaleString()} titles</p>
-              </button>
-            ))}
+            {genres.map((g) => {
+              const genreKey = toGenreKey(g.name);
+
+              return (
+                <button
+                  key={g.mal_id}
+                  className="genre-card"
+                  onClick={() => navigate(`/genre/${genreKey}`)}
+                >
+                  <h3>{g.name}</h3>
+                  <p>{g.count?.toLocaleString()} titles</p>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default GenreDisplay
+export default GenreDisplay;

@@ -9,7 +9,6 @@ const AnimeGenres = () => {
     <>
       <GenreDisplay />
       <LearnMore />
-      <Footer />
     </>
   );
 };

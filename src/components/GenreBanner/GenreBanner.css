@@ -1,0 +1,45 @@
+.genre-banner {
+  position: relative;
+  width: 100vw;
+  height: 120px; /* navbar-height vibe */
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+}
+
+/* dark overlay */
+.genre-banner__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.65),
+    rgba(0, 0, 0, 0.85)
+  );
+  z-index: 0;
+}
+
+/* genre title */
+.genre-banner__title {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* mobile tweak */
+@media (max-width: 600px) {
+  .genre-banner {
+    height: 100px;
+    padding: 0 20px;
+  }
+}

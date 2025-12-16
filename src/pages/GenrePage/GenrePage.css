@@ -1,0 +1,365 @@
+/* =========================
+   PAGE BACKGROUND
+========================= */
+.genre-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #0a0a0a;
+}
+
+.genre-page__content {
+  padding: 48px 16px 64px; /* ⬅️ increased top & bottom */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* =========================
+   FULL-WIDTH BANNER
+========================= */
+.genre-banner {
+  position: relative;
+  width: 100vw;
+  height: 240px;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+
+  overflow: hidden; /* ✅ clips gloss */
+  isolation: isolate; /* ✅ contains stacking */
+}
+
+/* dark overlay */
+.genre-banner__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.85));
+  z-index: 0;
+}
+
+/* one-time dark diagonal gloss */
+.genre-banner::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 60%;
+  height: 200%;
+
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.35) 50%,
+    transparent 100%
+  );
+
+  transform: rotate(20deg);
+  z-index: 2;
+  pointer-events: none;
+
+  animation: bannerDarkGlossOnce 1.6s ease-out forwards;
+}
+
+@keyframes bannerDarkGlossOnce {
+  0% {
+    transform: translateX(0) rotate(20deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(260%) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+/* banner text stack (back + title) */
+.genre-banner__text {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* tiny back link above title */
+.genre-banner__back {
+  all: unset;
+  cursor: pointer;
+  width: fit-content;
+
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.genre-banner__back:hover {
+  color: #fff;
+  transform: translateX(-2px);
+}
+
+/* genre title */
+.genre-banner__title {
+  color: #fff;
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 800;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  margin: 0;
+  padding-top: 24px;
+  padding-left: 32px;
+}
+
+/* =========================
+   CONTENT WRAPPER
+========================= */
+.genre-page__content {
+  padding: 32px 16px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* error */
+.genre-error {
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(20, 20, 28, 0.6);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 16px;
+}
+
+/* =========================
+   ANIME GRID
+========================= */
+.anime-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(140px, 1fr));
+  gap: 32px 24px;
+}
+
+@media (max-width: 1100px) {
+  .anime-grid {
+    grid-template-columns: repeat(5, minmax(140px, 1fr));
+  }
+}
+@media (max-width: 900px) {
+  .anime-grid {
+    grid-template-columns: repeat(4, minmax(140px, 1fr));
+  }
+}
+@media (max-width: 700px) {
+  .anime-grid {
+    grid-template-columns: repeat(3, minmax(140px, 1fr));
+  }
+}
+@media (max-width: 480px) {
+  .anime-grid {
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+  }
+}
+
+/* =========================
+   ANIME CARD (CONTRAST)
+========================= */
+.anime-card {
+  all: unset;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  background: #222222e8; /* lighter than page */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 14px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+    border-color 0.25s ease, background 0.25s ease;
+}
+
+.anime-card:hover {
+  transform: translateY(-6px);
+  background: #1a1a26;
+  border-color: rgba(139, 92, 246, 0.65);
+
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85),
+    0 0 0 1px rgba(139, 92, 246, 0.25);
+}
+
+/* poster */
+.anime-poster {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #000;
+  margin-bottom: 6px;
+}
+
+.anime-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* meta */
+.anime-meta h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  line-clamp: 2;              
+  overflow: hidden;
+}
+
+
+.anime-meta p {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.dot {
+  margin: 0 6px;
+}
+
+/* =========================
+   SKELETONS (DARK THEME)
+========================= */
+.anime-card.skeleton {
+  border-color: transparent;
+  background: linear-gradient(100deg, #383838 40%, #616161 50%, #1d1d1d 60%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+  height: 260px;
+  box-shadow: none;
+}
+
+@keyframes skeleton-loading {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+
+/* =========================
+   SCROLL TO TOP BUTTON
+========================= */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 1000;
+
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+
+  background: rgba(37, 37, 37, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.scroll-top-btn:hover {
+  transform: translateY(-4px);
+  background: rgb(63, 63, 63);
+  border-color: rgba(139, 92, 246, 0.65);
+}
+
+/* mobile sizing */
+@media (max-width: 600px) {
+  .scroll-top-btn {
+    width: 44px;
+    height: 44px;
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+
+/* =========================
+   LOAD MORE BUTTON
+========================= */
+.load-more-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 22px 0 8px;
+}
+
+.load-more {
+  all: unset;
+  cursor: pointer;
+
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(41, 24, 24, 0.14);
+  background: rgba(43, 43, 43, 0.65);
+
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.load-more:hover {
+  transform: translateY(-2px);
+  border-color: rgba(33, 27, 48, 0.897);
+  background: rgba(61, 61, 61, 0.925);
+}
+
+.load-more:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================
+   MOBILE BANNER TWEAK
+========================= */
+@media (max-width: 600px) {
+  .genre-banner {
+    height: 160px;
+    padding: 0 20px;
+  }
+}
