@@ -68,10 +68,10 @@ const Hero = () => {
         <p>{descText}</p>
 
         <div className={`hero-btns ${showButtons ? "show" : ""}`}>
-          <a href="#learn-more">
-            <button className="btn-primary">Learn More</button>
-          </a>
           <Link to="/genres">
+            <button className="btn-primary">Genres</button>
+          </Link>
+          <Link to="/search">
             <button className="btn-secondary">Browse</button>
           </Link>
         </div>

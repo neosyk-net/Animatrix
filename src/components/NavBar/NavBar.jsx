@@ -53,8 +53,8 @@ const toggleMenu = () => {
 
         <div className="navbar-right">
           <ul>
-            <Link to='/genres'><li>Browse</li></Link>
-            <li><a href="#learn-more">About Us</a></li>
+            <Link to='/search'><li>Search</li></Link>
+            <Link to='/genres'><li><a href="#learn-more">Genres</a></li></Link>
             <li><a href="#footer">Contact</a></li>
           </ul>
         </div>
@@ -62,7 +62,7 @@ const toggleMenu = () => {
 
       <div ref={menuRef} className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         <ul>
-          <li onClick={() => setMenuOpen(false)}><Link to='/genres'>Browse</Link></li>
+          <li onClick={() => setMenuOpen(false)}><Link to='/search'>Browse</Link></li>
           <li onClick={() => setMenuOpen(false)}><a href="#learn-more">About Us</a></li>
           <li onClick={() => setMenuOpen(false)}><a href="#footer">Contact</a></li>
         </ul>

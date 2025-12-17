@@ -15,9 +15,9 @@ const Footer = () => {
         <nav className="footer-links" aria-label="Footer">
           <div className="footer-col">
             <h4>Explore</h4>
-            <Link to="/genres">Browse</Link>
-            <a href="#">Top Picks</a>
-            <a href="#">New</a>
+            <Link to="/search">Browse</Link>
+            <Link to="/genres">Genres</Link>
+            <Link to="/">Home</Link>
           </div>
 
           <div className="footer-col">
