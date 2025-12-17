@@ -63,7 +63,7 @@ const toggleMenu = () => {
       <div ref={menuRef} className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         <ul>
           <li onClick={() => setMenuOpen(false)}><Link to='/search'>Browse</Link></li>
-          <li onClick={() => setMenuOpen(false)}><a href="#learn-more">About Us</a></li>
+          <li onClick={() => setMenuOpen(false)}><Link to="/genres">Genres</Link></li>
           <li onClick={() => setMenuOpen(false)}><a href="#footer">Contact</a></li>
         </ul>
       </div>
